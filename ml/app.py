@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from utils import clean_and_load_products
+from gpt_helper import get_keywords_from_gpt
 import re
 
 # 🧹 Load and clean products
@@ -14,9 +15,13 @@ occasion_keywords = {
     "trip": ["maggi", "chips", "bisleri", "frooti", "tissues"],
     "birthday": ["cake", "soda", "chips", "plastic bags", "napkins"],
     "monthly groceries": ["rice", "dal", "atta", "turmeric", "soap", "toothpaste"],
-    "puja": ["agarbatti", "camphor", "ghee diya"],
+    "puja": ["agarbatti", "camphor", "ghee", "diya"],
     "college": ["maggi", "kurkure", "bisleri", "poha", "detergent"]
 }
+
+# 🔍 Match helper
+def matches_any_tag(query_words, tags):
+    return any(word in tags for word in query_words)
 
 @app.route('/generate', methods=['POST'])
 def generate_cart():
@@ -27,33 +32,48 @@ def generate_cart():
     prices = re.findall(r'\d+', query)
     budget = int(prices[0]) if prices else 9999
 
-    # 🎉 Match occasion keywords
+    # 🎉 Occasion-based match
     for occasion, keywords in occasion_keywords.items():
         if occasion in query:
             matched = []
             total = 0
             for kw in keywords:
-                for p in products:
-                    if kw in p["name"].lower() and p["availability"]:
-                        if total + p["price"] <= budget:
-                            matched.append(p)
-                            total += p["price"]
-                            break
+                candidates = [
+                    p for p in products
+                    if kw in p["name"].lower() and p["availability"]
+                ]
+                candidates.sort(key=lambda x: x.get("rating", 0), reverse=True)
+                for p in candidates:
+                    if total + p["price"] <= budget:
+                        matched.append(p)
+                        total += p["price"]
+                        break
             return jsonify({"products": matched})
 
-    # 🔍 Default: tag matching
+    # 🤖 GPT-based keyword extraction
+    gpt_keywords = get_keywords_from_gpt(query)
+    print("🧠 GPT keywords:", gpt_keywords)
+
+    # 📦 General tag search using GPT keywords
+    query_words = gpt_keywords if gpt_keywords else re.findall(r'\b[a-zA-Z]+\b', query)
+
     tag_matched = [
         p for p in products
-        if any(tag in query for tag in p["tags"]) and p["availability"]
+        if matches_any_tag(query_words, p["tags"]) and p["availability"]
     ]
 
-    # 💸 Filter under budget
+    # 🏆 Sort by rating DESC, then price ASC
+    sorted_tagged = sorted(tag_matched, key=lambda x: (-x.get("rating", 0), x["price"]))
+
+    # 💸 Apply budget filter & limit
     selected = []
     total = 0
-    for item in sorted(tag_matched, key=lambda x: x["price"]):
+    for item in sorted_tagged:
         if total + item["price"] <= budget:
             selected.append(item)
             total += item["price"]
+        if len(selected) >= 15:
+            break
 
     return jsonify({"products": selected})
 
