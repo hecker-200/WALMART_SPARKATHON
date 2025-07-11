@@ -1,0 +1,151 @@
+.product-card {
+  background-color: rgba(255, 255, 255, 0.04); 
+backdrop-filter: blur(12px);
+border: 1px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px var(--shadow-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 40px var(--glow-color);
+  border: 1px solid rgba(255, 194, 32, 0.2);
+}
+
+.product-card__image {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--bg-tertiary);
+}
+
+.product-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-card__img {
+  transform: scale(1.05);
+}
+
+.product-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.product-card__name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--walmart-yellow);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.product-card__description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+  flex: 1;
+}
+
+.product-card__details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.product-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.product-card__price-symbol {
+  color: var(--walmart-blue);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.product-card__price-value {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.product-card__original-price {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-decoration: line-through;
+}
+
+.product-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.product-card__stars {
+  display: flex;
+  gap: 0.1rem;
+}
+
+.product-card__star {
+  color: var(--text-muted);
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.product-card__star.active {
+  color: var(--walmart-yellow);
+}
+
+.product-card__rating-text {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.product-card__category {
+  background-color: var(--bg-tertiary);
+  color: var(--walmart-blue);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .product-card {
+    padding: 1rem;
+  }
+  
+  .product-card__image {
+    height: 150px;
+  }
+  
+  .product-card__name {
+    font-size: 1.1rem;
+  }
+  
+  .product-card__description {
+    font-size: 0.85rem;
+  }
+}

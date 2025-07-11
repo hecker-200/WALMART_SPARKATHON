@@ -1,0 +1,113 @@
+.cart-summary {
+background-color: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(6px);
+border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.cart-summary__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--walmart-yellow);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.cart-summary__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.cart-summary__stat {
+  background-color: var(--bg-tertiary);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.cart-summary__stat:hover {
+  transform: translateY(-4px);
+}
+
+.cart-summary__stat-label {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.cart-summary__stat-value {
+  display: block;
+  color: var(--walmart-blue);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.cart-summary__reminder {
+  background-color: var(--bg-tertiary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border-left: 4px solid var(--walmart-yellow);
+}
+
+.cart-summary__reminder-title {
+  color: var(--walmart-yellow);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.cart-summary__reminder-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-summary__reminder-list li {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.4;
+}
+
+.cart-summary__reminder-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--walmart-blue);
+  font-weight: bold;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .cart-summary {
+    padding: 1.5rem;
+  }
+  
+  .cart-summary__stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .cart-summary__stat {
+    padding: 1rem;
+  }
+  
+  .cart-summary__stat-value {
+    font-size: 1.5rem;
+  }
+  
+  .cart-summary__reminder {
+    padding: 1rem;
+  }
+}

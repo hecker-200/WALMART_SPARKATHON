@@ -1,0 +1,107 @@
+.button {
+  font-family: var(--font-body);
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sizes */
+.button--small {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.button--medium {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+.button--large {
+  padding: 16px 32px;
+  font-size: 18px;
+}
+
+/* Primary variant - Walmart blue to yellow animation */
+.button--primary {
+  background-color: var(--walmart-blue);
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(58, 160, 255, 0.2);
+}
+
+.button--primary:hover {
+  background-color: var(--walmart-yellow);
+  color: var(--bg-primary);
+  box-shadow: 0 6px 20px rgba(255, 194, 32, 0.3);
+  transform: translateY(-2px);
+}
+
+.button--primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary variant */
+.button--secondary {
+  background-color: transparent;
+  color: var(--walmart-blue);
+  border: 2px solid var(--walmart-blue);
+}
+
+.button--secondary:hover {
+  background-color: var(--walmart-blue);
+  color: var(--text-primary);
+}
+
+/* Danger variant */
+.button--danger {
+  background-color: #ff4757;
+  color: var(--text-primary);
+}
+
+.button--danger:hover {
+  background-color: #ff3838;
+  transform: translateY(-2px);
+}
+
+/* Disabled state */
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.button:disabled:hover {
+  background-color: var(--walmart-blue);
+  transform: none;
+  box-shadow: 0 4px 12px rgba(58, 160, 255, 0.2);
+}
+
+/* Loading animation */
+.button--loading {
+  pointer-events: none;
+}
+
+.button--loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
