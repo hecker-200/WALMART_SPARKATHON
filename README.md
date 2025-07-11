@@ -90,9 +90,9 @@ Open for collabs and ideas! Feel free to fork, raise issues, or send PRs — let
 
 ## 📞 Contact
 
-Adithya Subhash (hecker)
+Adithya Subhash (hecker), Pragati Khandelwal(PK)
 IIT Jodhpur | Software Engineer | Retail Tech Enthusiast
-[GitHub](https://github.com/<your-username>) | [LinkedIn](https://linkedin.com/in/<your-linkedin>)
+
 
 ---
 
@@ -101,5 +101,5 @@ IIT Jodhpur | Software Engineer | Retail Tech Enthusiast
 
 ---
 
-*Made with ❤️ and a lot of caffeine by hecker and pk*
+*Made with ❤️ and a lot of caffeine by hecker and PK *
 
